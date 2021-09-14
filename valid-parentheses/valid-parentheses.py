@@ -16,7 +16,6 @@ class Solution(object):
                     stack.pop()
                 else:
                     return False
-        print("hi")
-        print(stack)
+
         return False if stack else True
         
