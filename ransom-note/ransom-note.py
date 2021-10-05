@@ -5,18 +5,11 @@ class Solution(object):
         :type magazine: str
         :rtype: bool
         """
-        dic = {}
-        for char in magazine:
-            if char in dic:
-                dic[char]+=1
-            else:
-                dic[char] = 1
-        
-        for char in ransomNote:
-            if char in dic:
-                dic[char]-=1
-                if dic[char] == 0:
-                    del dic[char]
-            else:
+        dic = Counter(magazine)
+        for i in ransomNote:
+            if dic[i] <= 0:
                 return False
+                
+            dic[i]-=1
         return True
+        
