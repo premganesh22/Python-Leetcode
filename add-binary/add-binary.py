@@ -1,5 +1,10 @@
-class Solution:
-    def addBinary(self, a: str, b: str) -> str:
+class Solution(object):
+    def addBinary(self, a, b):
+        """
+        :type a: str
+        :type b: str
+        :rtype: str
+        """
         count = []
         carry = 0
         i = 0
@@ -16,4 +21,3 @@ class Solution:
             i+=1
 
         return ''.join(count[::-1])
-        
