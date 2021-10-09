@@ -1,21 +1,19 @@
-class Solution(object):        
-    def compress(self, chars):
-        """
-        :type chars: List[str]
-        :rtype: int
-        """
-        
+class Solution:
+    def compress(self, chars: List[str]) -> int:
         count = 1
         index = 0
-        for i in range(1,len(chars)+1):
-            if i < len(chars) and chars[i] == chars[i-1]:
+        for i in range(len(chars)):
+            if i < len(chars)-1 and chars[i] == chars[i+1]:
                 count+=1
             else:
-                chars[index] = chars[i-1]
-                index+=1
                 if count > 1:
-                    for j in str(count): 
-                        chars[index] = j
+                    chars[index] = chars[i]
+                    index+=1
+                    for num in str(count):
+                        chars[index] = num
                         index+=1
+                else:
+                    chars[index] = chars[i]
+                    index = index+1
                 count = 1
         return index
