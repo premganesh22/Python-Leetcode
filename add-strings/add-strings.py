@@ -1,13 +1,13 @@
-class Solution(object):
+class Solution:
     def convert(self,nums):
         suma = 0
         i = 0
-        while i < len(nums)-1:
-      
-            suma+= (ord(nums[i])-(ord('1')-1))
+        while i < len(nums):
             suma*=10
+            suma+= (ord(nums[i])-(ord('1')-1))
+            
             i+=1
-        suma+= ord(nums[i])-(ord('1')-1)
+        #suma+= ord(nums[i])-(ord('1')-1)
         return suma
 
     def convert_int_string(self,string):
