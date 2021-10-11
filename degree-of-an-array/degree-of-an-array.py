@@ -1,19 +1,16 @@
 class Solution:
     def findShortestSubArray(self, nums: List[int]) -> int:
-        dic = {}
-        for n in range(len(nums)):
-            if nums[n] in dic:
-                dic[nums[n]].append(n)
-            else:
-                dic[nums[n]] = [n]
+        dic = defaultdict(list)
+        for i in range(len(nums)):
+            dic[nums[i]].append(i)
         
-        maxi = 0
-        for key, values in dic.items():
-            maxi = max(maxi,len(values))
+        max_len = 0
+        for i,j in dic.items():
+            max_len = max(max_len,len(j))
         
-        mini = len(nums)
-        for key,values in dic.items():
-            if len(values) == maxi:
-                mini = min(mini,values[-1]-values[0]+1)
-        return mini
+        min_distance = len(nums)
+        for i,j in dic.items():
+            if len(j) == max_len:
+                min_distance = min(min_distance, j[-1]-j[0]+1)
+        return min_distance
         
