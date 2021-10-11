@@ -1,21 +1,21 @@
-class Solution(object):
-    def isValidSudoku(self, board):
-        """
-        :type board: List[List[str]]
-        :rtype: bool
-        """
-        rows = collections.defaultdict(set)
-        columns = collections.defaultdict(set)
-        row_col = collections.defaultdict(set)
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
         
-        for r in range(9):
-            for c in range(9):
-                if board[r][c] == '.':
+        dic_row = defaultdict(list)
+        dic_column = defaultdict(list)
+        dic_box = defaultdict(list)
+        
+        for row in range(len(board)):
+            for column in range(len(board[0])):
+                val = board[row][column]
+            
+                if val == '.':
                     continue
-                if (board[r][c] in rows[r] or board[r][c] in columns[c] or board[r][c] in row_col[(r//3,c//3)]):
+                if (val in dic_row[row] or val in dic_column[column] or val in dic_box[(row//3,column//3)]):
+                    print(val)
                     return False
-                else:
-                    rows[r].add(board[r][c])
-                    columns[c].add(board[r][c])
-                    row_col[(r/3,c/3)].add(board[r][c])
-        return True      
+                dic_row[row].append(val)
+                dic_column[column].append(val)
+                dic_box[(row//3,column//3)].append(val)
+        return True
+        
