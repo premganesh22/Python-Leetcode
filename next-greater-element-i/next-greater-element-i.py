@@ -1,19 +1,13 @@
-class Solution(object):
-    def nextGreaterElement(self, nums1, nums2):
-        """
-        :type nums1: List[int]
-        :type nums2: List[int]
-        :rtype: List[int]
-        """
-        stack = []
+class Solution:
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
         dic = {}
+        stack = [nums2[0]]
+        for i in range(1,len(nums2)):
+            while stack and nums2[i] > stack[-1]:
+                dic[stack.pop()] = nums2[i]
+            stack.append(nums2[i])
+        
         output = []
-        for i in nums2:
-
-            while stack and stack[-1] < i:
-                dic[stack.pop()] = i
-            stack.append(i)
-
         for i in nums1:
             if i in dic:
                 output.append(dic[i])
