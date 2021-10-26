@@ -1,14 +1,18 @@
 class Solution:
     def countBinarySubstrings(self, s: str) -> int:
-        arr = []
+
+        
+        
+        
+        stack = []
         count = 1
         for i in range(1,len(s)):
             if s[i] != s[i-1]:
-                arr.append(count)
+                stack.append(count)
                 count = 0
             count+=1
-        arr.append(count)
-        count = 0
-        for i in range(1,len(arr)):
-            count+=min(arr[i],arr[i-1])
-        return count
+        stack.append(count)
+        ans = 0
+        for val in range(1,len(stack)):
+            ans+=min(stack[val],stack[val-1])
+        return ans
