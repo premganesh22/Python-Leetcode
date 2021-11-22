@@ -1,15 +1,14 @@
 class Solution:
     def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
-        l=[]
-        for ppl,start,end in trips:
-            l.append([start,ppl])
-            l.append([end,-ppl])
-
+        l = []
+        for cap, start, end in trips:
+            l.append([start,cap])
+            l.append([end,-cap])
+            
         l.sort()
-        candidate=0
-        for _,ppl in l:
-            candidate+=ppl
+        candidate = 0
+        for time,cap in l:
+            candidate+=cap
             if candidate > capacity:
                 return False
         return True
-        
