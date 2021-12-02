@@ -5,15 +5,16 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def helper(self,data,res):
-        if data:
-            if data.left:
-                self.helper(data.left,res)
-            res.append(data.val)
-            if data.right:
-                self.helper(data.right,res)
-        
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        res = []
-        self.helper(root,res)
-        return res
+        output = []
+        
+        def helper(root):
+            if not root:
+                return None
+            helper(root.left)
+            output.append(root.val)
+            helper(root.right)
+        
+        helper(root)
+        return output
+        
