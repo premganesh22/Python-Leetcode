@@ -6,21 +6,24 @@
 #         self.right = right
 class Solution:
     def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
-        lista  = [0]
-        if not root:
-            return 0
+        #Time: O(n)
+        #Space: O(n)
         
-        def helper(node,flag):
-            if not node.right and not node.left:
-                if flag:
-                    lista[0]+=node.val
+        
+        self.output = 0
+        if not root:
+            return None
+        def helper(root,status):
+            if not root.left and not root.right:
+                if status:
+                    self.output+=root.val    
                 else:
                     return 0
-            if node.left:
-                helper(node.left,True)
-            if node.right:
-                helper(node.right,False)
-            
+            if root.left:
+                helper(root.left,True)
+            if root.right:
+                helper(root.right,False)
+        
         helper(root,False)
-        return lista[0]
+        return self.output
         
