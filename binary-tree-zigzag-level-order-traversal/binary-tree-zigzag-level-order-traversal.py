@@ -6,6 +6,9 @@
 #         self.right = right
 class Solution:
     def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        #Time: O(n)
+        #Space: O(n)
+        
         if not root:
             return []
         stack = [root]
