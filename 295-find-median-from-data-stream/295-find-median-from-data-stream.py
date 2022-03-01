@@ -6,16 +6,18 @@ class MedianFinder:
         
 
     def addNum(self, num: int) -> None:
+        #check where the element has to go
         if not self.max_heap or -self.max_heap[0]>=num:
             heapq.heappush(self.max_heap,-num)
         else:
             heapq.heappush(self.min_heap,num)
         
+        #Balance the heap
         if len(self.max_heap) > len(self.min_heap)+1:
             temp = heapq.heappop(self.max_heap)
             heapq.heappush(self.min_heap,-temp)
             
-        if len(self.max_heap)+1 < len(self.min_heap):
+        elif len(self.max_heap)+1 < len(self.min_heap):
             temp = heapq.heappop(self.min_heap)
             heapq.heappush(self.max_heap,-temp)
 
