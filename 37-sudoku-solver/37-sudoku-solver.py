@@ -10,16 +10,16 @@ class Solution:
                         return row,col
             return None,None
 
-        def is_valid(board,guess,row,col):
-            #guess = board[row][col]
+        def is_valid(board,row,col):
+            guess = board[row][col]
 
             #Row
-            if guess in board[row]:
-                return False
-
+            for r in range(9):
+                if board[row][r] == guess and r != col:
+                    return False
             #Col
             for c in range(9):
-                if board[c][col] == guess:# and c != row:
+                if board[c][col] == guess and c != row:
                     return False
 
             #three matrix
@@ -28,11 +28,14 @@ class Solution:
 
             for r in range(row_idx,row_idx+3):
                 for c in range(col_idx,col_idx+3):
-                    if board[r][c] == guess:# and r != row and c!= col:
+                    if board[r][c] == guess and r != row and c!= col:
                         return False
             return True
 
-        def sudaku(board):
+        def sudaku(board,row,col):
+
+            if not row == -1 and not is_valid(board,row,col):
+                return 
 
             row,col = find_next_element(board)
 
@@ -40,10 +43,9 @@ class Solution:
                 return True
 
             for idx in range(1,10):
-                if is_valid(board,str(idx),row,col):
-                    board[row][col] = str(idx)
-                    if sudaku(board):
-                        return True
-                    board[row][col] = '.'
+                board[row][col] = str(idx)
+                if sudaku(board,row,col):
+                    return True
+                board[row][col] = '.'
             return False
-        sudaku(board)
+        sudaku(board,-1,-1)
