@@ -34,10 +34,7 @@ class Solution:
 
         def sudaku(board):
 
-
-
             row,col = find_next_element(board)
-
 
             if row is None:
                 return True
@@ -47,6 +44,6 @@ class Solution:
                     board[row][col] = str(idx)
                     if sudaku(board):
                         return True
-                board[row][col] = '.'
+                    board[row][col] = '.'
             return False
         sudaku(board)
