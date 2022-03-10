@@ -1,21 +1,21 @@
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
-        def paren(left,right,slate,result):
-            #Back tracking
-            if right < left:
+        def helper(left,right,slate,result):
+            
+            if left > right:
                 return
-            elif right == 0 and left == 0:
-                result.append(''.join(slate))
-                return
+            
+            if left == 0 and right == 0:
+                result.append(''.join(slate[:]))
+            
             else:
-                #add left
-                if left > 0:
+                if left:
                     slate.append('(')
-                    paren(left-1,right,slate,result)
+                    helper(left-1,right,slate,result)
                     slate.pop()
-                if right > 0:
+                if right:
                     slate.append(')')
-                    paren(left,right-1,slate,result)
+                    helper(left,right-1,slate,result)
                     slate.pop()
                 return result
-        return paren(n,n,[],[])
+        return helper(n,n,[],[])
