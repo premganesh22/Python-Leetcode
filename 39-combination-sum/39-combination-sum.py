@@ -1,19 +1,19 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        
-        def helper(candidates,target,slate,result):
+        def helper(candidates,idx,target,slate,result):
             if sum(slate) == target:
                 result.append(slate[:])
                 return
             
-            elif sum(slate) > target:
+            if sum(slate) > target or len(candidates) == 0:
                 return
             
-            else:
-                for num in range(len(candidates)):
-                    slate.append(candidates[num])
-                    helper(candidates[num:],target,slate,result)
-                    slate.pop()
-                return result
+            for i in range(idx,len(candidates)):
+                slate.append(candidates[i])
+                helper(candidates,i,target,slate,result)
+                slate.pop()
+            return result
+        return helper(candidates,0,target,[],[])
                 
-        return helper(candidates,target,[],[])
+                
+        
