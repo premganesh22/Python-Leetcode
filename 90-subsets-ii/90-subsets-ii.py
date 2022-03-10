@@ -1,24 +1,26 @@
 class Solution:
     def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
-        def sub(nums,slate,result):
+        def helper(nums,slate,result):
             if len(nums) == 0:
-                result.append(slate.copy())
-                return result
+                result.append(slate[:])
+                return
             else:
-                cur_index = nums[0]
                 count = 0
-                for index in range(len(nums)):
-                    if cur_index == nums[index]:
+                cur_num = nums[0]
+                for i in range(len(nums)):
+                    if cur_num == nums[i]:
                         count+=1
-                #Include
+                
+                #Exclude
+                helper(nums[count:],slate,result)
                 for i in range(count):
+                    #Include
                     slate.append(nums[i])
-                    sub(nums[count:],slate,result)
+                    helper(nums[count:],slate,result)
+                
                 for i in range(count):
                     slate.pop()
-                #Exclude
-                sub(nums[count:],slate,result)
+                
                 return result
-        nums.sort()
-        return sub(nums,[],[])
+        return helper(sorted(nums),[],[])
         
