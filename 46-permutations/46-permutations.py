@@ -1,15 +1,16 @@
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         
-        def per(s,slate,result):
-            if len(s) == 0:
-                result.append(slate.copy())
+        def helper(nums,slate,result):
+            
+            if len(nums) == 0:
+                result.append(slate[:])
+                return
             else:
-                for i in range(len(s)):
-                    slate.append(s[i])
-                    per(s[:i]+s[i+1:],slate,result)
+                for i in range(len(nums)):
+                    slate.append(nums[i])
+                    helper(nums[:i]+nums[i+1:],slate,result)
                     slate.pop()
                 return result
-        return per(nums,[],[])
-
-                
+        return helper(nums,[],[])
+        
