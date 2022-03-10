@@ -1,19 +1,18 @@
 class Solution:
     def combine(self, n: int, k: int) -> List[List[int]]:
-        def nk(cur_num,n,k,slate,result):
+        def helper(n,cur_num,k,slate,result):
+            if cur_num > n:
+                return
             if k == 0:
                 result.append(slate[:])
                 return result
-            if cur_num > n:
-                return 
             else:
+                #Exlcude
+                helper(n,cur_num+1,k,slate,result)
+                
                 #Include
                 slate.append(cur_num)
-                nk(cur_num+1,n,k-1,slate,result)
+                helper(n,cur_num+1,k-1,slate,result)
                 slate.pop()
-
-                #Exclude
-                nk(cur_num+1,n,k,slate,result)
-                return result
-
-        return nk(1,n,k,[],[])
+            return result
+        return helper(n+1,1,k,[],[])
