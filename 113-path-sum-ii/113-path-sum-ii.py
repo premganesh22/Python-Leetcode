@@ -19,15 +19,14 @@ class Solution:
                 return
             
             #REcursive case
-            slate.append(root.val)
             if root.left:
-                
+                slate.append(root.val)
                 dfs(root.left,targetSum-root.val,slate)
-                #slate.pop()
+                slate.pop()
             if root.right:
-                #slate.append(root.val)
+                slate.append(root.val)
                 dfs(root.right,targetSum-root.val,slate)
-            slate.pop()
+                slate.pop()
             return
         
         dfs(root,targetSum,[])
