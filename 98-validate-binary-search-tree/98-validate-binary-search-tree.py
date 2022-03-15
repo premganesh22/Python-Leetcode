@@ -13,7 +13,7 @@ class Solution:
         def dfs(root):
             smallest,largest,isBST = root.val,root.val,True 
             if not root.left and not root.right:
-                pass 
+                return (smallest,largest) 
             if root.left:
                 s,l = dfs(root.left)
                 smallest = min(smallest,s)
