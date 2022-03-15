@@ -16,8 +16,8 @@ class Solution:
             if count[0] < k:
                 output.append(root.val)
                 count[0]+=1
-            if root.right:
-                inorder(root.right)
+                if root.right:
+                    inorder(root.right)
             return 
         inorder(root)
         print(output)
