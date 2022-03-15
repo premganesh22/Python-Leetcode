@@ -13,9 +13,9 @@ class Solution:
             if sametree(root,subRoot):
                 global_list[0] = True
                 return
-            if root.left:
+            if root.left and global_list[0] == False:
                 dfs(root.left,subRoot)
-            if root.right:
+            if root.right and global_list[0] == False:
                 dfs(root.right,subRoot)
             return
         def sametree(p,q):
