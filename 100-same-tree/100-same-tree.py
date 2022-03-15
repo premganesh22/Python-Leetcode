@@ -12,30 +12,16 @@ class Solution:
         if not p or not q:
             return False
         def dfs(p,q):
-            if not p.left and not p.right and not q.left and not q.right:
-                if p.val != q.val:
-                    global_result[0] = False
+            if not p and not q:
                 return
-
-            if (not p.left and not p.right) or (not q.left and not q.right):
+            if not p or not q:
                 global_result[0] = False
                 return
-
-            if p.left and q.left:
-                if not p.left.val == q.left.val:
-                    global_result[0] = False
-                    
+            if p.val == q.val:
                 dfs(p.left,q.left)
-
-            elif p.left or q.left:
-                global_result[0] = False
-
-            if p.right and q.right:
-                if not p.right.val == q.right.val:
-                    global_result[0] = False
                 dfs(p.right,q.right)
-            elif p.right or q.right:
+            else:
                 global_result[0] = False
-            return       
+            return
         dfs(p,q)
         return global_result[0]
