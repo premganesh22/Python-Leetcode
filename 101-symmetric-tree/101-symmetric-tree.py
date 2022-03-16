@@ -6,25 +6,23 @@
 #         self.right = right
 class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
-        queue = deque()
-        queue.append(root)
-        while queue:
-            start = 0
-            end = len(queue)-1
-           
-            while start < end:
-                if queue[start] and queue[end]:
-                    if not queue[start].val == queue[end].val:
-                        return False
-                elif queue[start] or queue[end]:
-                    return False
-                start+=1
-                end-=1
+        if not root:
+            return True
+        
+        stack = [(root.left,root.right)]
+        
+        while stack:
+            val = stack.pop()
+            left,right = val[0],val[1]
             
-            length = len(queue)
-            for i in range(length):
-                node = queue.popleft()
-                if node:
-                    queue.append(node.left)
-                    queue.append(node.right)
+            if not left and not right:
+                continue
+
+            if not left or not right:
+                return False
+            if left.val == right.val:
+                stack.append((left.left,right.right))
+                stack.append((left.right,right.left))
+            else:
+                return False
         return True
