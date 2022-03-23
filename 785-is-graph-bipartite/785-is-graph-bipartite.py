@@ -22,10 +22,22 @@ class Solution:
                             if distance[edge] == distance[node]:
                                 return False
                 return True
+            
+            def dfs(s):
+                visited[s] = 1
+                for edge in graph[s]:
+                    if visited[edge] == -1:
+                        distance[edge] = distance[s]*-1
+                        if not dfs(edge):
+                            return False
+                    else:
+                        if distance[edge] == distance[s]:
+                            return False
+                return True
 
             for source in range(node_count):
                 if visited[source] == -1:
-                    if not BFS(source):
+                    if not dfs(source):
                         return False
             return True
         return graph_biparity(graph)
