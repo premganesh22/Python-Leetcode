@@ -1,6 +1,6 @@
 class Solution:
     def countSubstrings(self, s: str) -> int:
-        
+        #Solution is from Neetcode youtude video
         count = 0
         for i in range(len(s)):
             left = i
