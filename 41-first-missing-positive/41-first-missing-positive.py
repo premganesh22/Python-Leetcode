@@ -12,6 +12,6 @@ class Solution:
         for i in range(len(nums)):
             if nums[i] != i+1:
                 return i+1
-        return i+2
+        return nums[i]+1
                 
         
