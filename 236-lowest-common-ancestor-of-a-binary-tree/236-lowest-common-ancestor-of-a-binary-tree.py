@@ -16,6 +16,9 @@ class Solution:
                 p_found = True
             elif node == q:
                 q_found = True
+                
+            if not node.left and not node.right:
+                return [p_found, q_found]
             
             if node.left:
                 left_val, right_val = dfs(node.left)
