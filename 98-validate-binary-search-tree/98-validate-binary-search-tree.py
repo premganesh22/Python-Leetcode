@@ -8,27 +8,38 @@ class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
         if not root:
             return True
-    
-        global_var = [True]
-        def dfs(root):
-            smallest,largest,isBST = root.val,root.val,True 
-            if not root.left and not root.right:
-                return (smallest,largest) 
-            if root.left:
-                s,l = dfs(root.left)
-                smallest = min(smallest,s)
-                largest = max(largest,l)
-                if l >= root.val:
-                    isBST = False
+        global_ans = [True]
+        
+        def dfs(node):
+            
+            if not node.left and not node.right:
+                return [node.val, node.val]
+                
+            smallest, largest = node.val, node.val
+            isbst = True
+            if node.left:
+                l_smallest, l_largest = dfs(node.left)
+                smallest = min(smallest, l_smallest)
+                largest = max(largest, l_largest)
+                if l_largest >= node.val:
+                    isbst = False
+            
+                            
+            if node.right:
+                r_smallest, r_largest = dfs(node.right)
+                largest = max(r_largest, largest)
+                smallest = min(r_smallest, smallest)
+                if r_smallest <= node.val:
+                    isbst = False
 
-            if root.right:
-                s,l = dfs(root.right)
-                smallest = min(smallest,s)
-                largest = max(largest,l)
-                if s <= root.val:
-                    isBST = False
-            if not isBST:
-                global_var[0] = False
-            return (smallest,largest)
+            if not isbst:
+                global_ans[0] = False
+                
+            return [smallest, largest]
+            
+        
         dfs(root)
-        return global_var[0]
+        return global_ans[0]
+                
+            
+        
