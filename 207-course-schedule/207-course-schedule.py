@@ -2,37 +2,34 @@ class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         
         #Build Adjacency list
-        a_map = {}
-        for c, d in prerequisites:
-            if d in a_map:
-                a_map[d].append(c)
+        a_list = {}
+        for target, source in prerequisites:
+            if source in a_list:
+                a_list[source].append(target)
             else:
-                a_map[d] = [c]
-        
-        
-        arrival = set()
+                a_list[source] = [target]
+            
         visited = set()
-        departure = set()
-        global_status = [True]
-        def dfs(node):
-            
-            arrival.add(node)
-            visited.add(node)
-            if node in a_map:
-                for course in a_map[node]:
-                    if course not in visited:
-                        dfs(course)
+        arrived = set()
+        departed = set()
+        def dfs(course):
+            visited.add(course)
+            arrived.add(course)
+            if course in a_list:
+                for nei in a_list[course]:
+                    if nei not in visited:
+                        if not dfs(nei):
+                            return False
+                    elif nei not in departed:
+                        return False
 
-                    else:
-                        if course not in departure:
-                            global_status[0] = False
-
-            departure.add(node)
+            departed.add(course)
+            return True
+        
+        for course in a_list:
+            if course not in visited:
+                if not dfs(course):
+                    return False
+                
+        return True
             
-        for node in a_map:
-            if node not in visited:
-                dfs(node)
-        return global_status[0]
-                    
-        
-        
