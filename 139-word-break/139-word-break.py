@@ -1,7 +1,6 @@
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        
-        #Recursion
+                #Recursion
 #         word_list = list(s)
 #         dic_set  = set(wordDict)
         
@@ -23,4 +22,5 @@ class Solution:
             for wordlength in range(1,i+1):
                 if s[i-wordlength:i] in wordDict and table[i-wordlength]:
                     table[i] = True
+                    break
         return table[len(s)]
